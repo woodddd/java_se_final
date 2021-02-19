@@ -1,0 +1,126 @@
+package exception;
+
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+public class Packman extends Frame implements KeyListener{
+	private Image img = Toolkit.getDefaultToolkit().getImage("pacman.png");
+	//private Image img1 = Toolkit.getDefaultToolkit().getImage("horse.gif");
+	private int x1 = 100,y1 = 0,x2 = 150 ,y2 = 50;
+	private int lcount, rcount,ucount,dcount;
+	
+	public Packman() {
+		setBounds(700,200,500,500);
+		setVisible(true);
+		setResizable(false);
+		
+		addKeyListener(this);
+		addWindowListener(new WindowAdapter(){
+			
+		
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		
+		g.drawImage(img, 225, 225, 275, 275, x1, y1, x2, y2, this);//observer 는 현재 그림을 그릴 위치
+		//dx1, dy1 destination 목표 시작 위치(좌표).
+		//dx2, dy2 destination 목표 최종 위치(좌표).
+		//sx1, sy1 source 가져올 이미지의 시작 위치(좌표).
+		//sx2, sx2 source 가져올 이미지의 종료 위치(좌표).
+		//this -> 이미지를 그릴 위치
+	}
+
+	public static void main(String[] args) {
+		new Packman();
+	}
+
+	
+	//인터페이스 KeyListener 추상메소드 오버라이딩
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+			
+			if(lcount % 2 == 0) {
+				x1 = 0;
+				y1 = 0;
+				x2 = 50;
+				y2 = 50;
+			}else {
+				x1 = 50;
+				y1 = 0;
+				x2= 100;
+				y2 = 50;
+			}
+			lcount ++;
+			
+		}else if(e.getKeyCode() == KeyEvent.VK_UP) {
+			if(ucount % 2 == 0) {
+				x1 = 200;
+				y1 = 0;
+				x2 = 250;
+				y2 = 50;
+			}else {
+				x1 = 250;
+				y1 = 0;
+				x2 = 300;
+				y2 = 50;
+			}
+			ucount ++;
+			
+		}else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			if(rcount % 2 == 0) {
+				x1 = 100;
+				y1 = 0;
+				x2 = 150;
+				y2 = 50;
+			}else {
+				x1 = 150;
+				y1 = 0;
+				x2 = 200;
+				y2 = 50;
+			}
+			rcount ++;
+		}else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+			if(dcount % 2 == 0) {
+				x1 = 300;
+				y1 = 0;
+				x2 = 350;
+				y2 = 50;
+			}else {
+				x1 = 350;
+				y1 = 0;
+				x2 = 400;
+				y2 = 50;
+			}
+			dcount++;
+			
+		}
+		repaint();
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

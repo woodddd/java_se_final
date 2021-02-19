@@ -1,0 +1,22 @@
+package collection;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class CollectionTest {
+
+	public static void main(String[] args) {//Interface Collection은 <E> 를 사용하고 있으므로 모든 자료형을 다 받아줄 수 있다.<E> -> <Elements> 요소,항목 이라는 뜻으로 모든 자료형을 받아줌. 주머니에 여러종류의 구슬이 들어있다고 생각하면됨.
+		Collection coll = new ArrayList();//Collection 은 인터페이스라 new 를 할 수 없다. 그래서 ArrayList라는 일반 클래스를 이용한다.
+		//ArrayList 는 Collection 을 implements 하고 있으므로 일반 클래스인 ArrayList는 Collection의 15개 추상메소드를 모두 오버라이드 하고 있다.
+		coll.add("호랑이");
+		coll.add("사자");
+		coll.add("호랑이");
+		coll.add(25);
+		coll.add(43.8);
+		coll.add("기린");
+		coll.add("코끼리");
+		
+		
+	}
+	
+}

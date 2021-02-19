@@ -1,0 +1,31 @@
+package swing;
+
+import java.awt.Button;
+import java.awt.Frame;
+import java.awt.Panel;
+
+public class SwingTest extends Frame{
+	private Button newBtn, exitBtn;
+	
+	public SwingTest() {
+		newBtn = new Button("새로만들기");
+		exitBtn = new Button("종료");
+				
+		Panel p = new Panel();
+		p.add(newBtn);
+		p.add(exitBtn);
+		
+		add("North", p);
+		
+		setBounds(700,100,300,400);
+		setVisible(true);
+		
+		
+	}
+	
+	
+	public static void main(String[] args) {
+		new SwingTest();
+		
+	}
+}

@@ -1,0 +1,35 @@
+package collection;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class MapTest {
+
+	public static void main(String[] args) {
+		//Interface Map 은 <k,v> - <key, value> 로 제너릭 속성이 두개임.
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("book101","백설공주");//interface인 Map 은 add가 아닌 put을 사용함
+		map.put("book201","인어공주");
+		map.put("book102","백설공주");//Value 중복허용
+		map.put("book301","피오나");//key 중복 허용
+		map.put("book101","엄지공주");
+		
+		//Map 은 key값을 통해서 vale 값을 가져옴
+		
+		System.out.println(map.get("book101")); //엄지공주
+		System.out.println(map.get("book102"));
+		
+		Scanner scan = new Scanner(System.in);
+		
+		System.out.print("코드 입력 : ");
+		scan.next();
+		
+		if(map.get(scan) == null) {
+			System.out.println("없는 Key 입니다.");
+		}else {
+			System.out.println(map.get("scan"));
+		}
+	}
+
+}

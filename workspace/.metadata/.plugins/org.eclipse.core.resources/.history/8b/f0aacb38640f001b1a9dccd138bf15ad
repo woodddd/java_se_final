@@ -1,0 +1,40 @@
+package swing;
+
+import java.awt.Button;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Panel;
+import java.awt.Toolkit;
+
+public class SwingTest extends Frame{
+	private Button newBtn, exitBtn;
+	private Image img = Toolkit.getDefaultToolkit().getImage("어니부기");
+	
+	public SwingTest() {
+		newBtn = new Button("새로만들기");
+		exitBtn = new Button("종료");
+				
+		Panel p = new Panel();
+		p.add(newBtn);
+		p.add(exitBtn);
+		
+		add("North", p);
+		
+		setBounds(700,100,300,400);
+		setVisible(true);
+		
+		
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		g.drawImage(img, 150,100,this);
+	}
+	
+	
+	public static void main(String[] args) {
+		new SwingTest();
+		
+	}
+}

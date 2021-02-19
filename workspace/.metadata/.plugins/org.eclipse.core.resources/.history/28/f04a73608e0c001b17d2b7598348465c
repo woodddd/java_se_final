@@ -1,0 +1,45 @@
+package collection;
+
+class GenericTest2<T>{
+	private T a;
+	
+	public GenericTest2(T a) {
+		this.a = a;
+	}
+	
+	public void setA(T a) {
+		this.a = a;
+	}
+	
+	public T getA() {
+		return a;
+	}
+}
+//--------------
+public class GenericMain2 {
+
+	public static void main(String[] args) {//ex)제너릭은 컴파일 할 때 타입이 결정되는 것임 <String> 은 컴파일 시 T 가 String 타입으로 바뀌게 되는것.
+		GenericTest<?> aa = new GenericTest<String>();// <?> Object 타입이 됨.
+		// () - default 생성자. 클래스안에 생성자가 하나도 없으므로 자동으로 생성
+		
+		//<?> - Object 타입일 떄에는,
+		//aa.setA("홍길동"); - 반드시 생성자를 통해서만 데이터가 전달이 됨.
+		//특별한 이유가 있는 것은 아니고 약속임.!
+		
+		//String name = aa.getA();// 생성자를 통하여 문자열을 넣었지만 생성된 객체의 타입은 Object 타입 이므로 Object 는 String 으로  추출하지 못함
+		//그러므로 강제 형변환을 해 주어야함. 자식 = (자식)부모
+		String name = (String)aa.getA();
+		System.out.println("이름 = " + name);
+		
+		GenericTest2<?> bb = new GenericTest2<Integer>(25);
+		//int age = (int)bb.getA(); - getA() 는 Object 형일때 형변환을 기본형(int)타입으로 해줄 수 없음
+		//하지만 AutounBoxing이 일어나서 에러가 발생되지는 않음.
+		//참조데이터타입(객체) => 기본데이터타입으로 변환하는 것을 언박싱이라고 한다.
+		//자바가 언박싱과정을 자동으로 처리해주는 것을 오토언박싱이라고 한다
+
+
+		int age = (int) bb.getA();//AutounBoxing -- 오토언박싱 되므로 (int)라고 사용해 줘도 됨
+		System.out.println("나이 = " + age);
+	}
+
+}

@@ -1,0 +1,211 @@
+package _interface;
+
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Paint;
+import java.awt.Panel;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+public class ImageMove extends Frame implements ActionListener,KeyListener,MouseListener,WindowListener {
+	//클래스의 모든 메소드에서 사용하기 위하여 필드로 변수 선언 
+	private Button initBtn, leftBtn, upBtn, downBtn, rightBtn;
+	private int x = 100, y = 100;
+	private Image img = Toolkit.getDefaultToolkit().getImage("강아지.jpg");
+	
+	public static void main(String[] args) {
+		new ImageMove().init();
+	}
+	
+	public void init() {
+		
+		
+		//버튼생성
+		initBtn = new Button("초기화");
+		leftBtn = new Button("왼쪽");
+		upBtn = new Button("위쪽");
+		downBtn = new Button("아래");
+		rightBtn = new Button("오른쪽");
+		
+		setBounds(100,100,500,500);
+		setResizable(false);
+		setVisible(true);
+		
+		Panel p = new Panel();
+		
+		p.setBackground(new Color(33,160,30));
+		
+		p.add(initBtn);
+		p.add(leftBtn);
+		p.add(upBtn);
+		p.add(downBtn);
+		p.add(rightBtn);
+		
+		this.add("North", p);
+		
+		//이벤트
+		this.addWindowListener(this);
+		
+		initBtn.addActionListener(this);
+		leftBtn.addActionListener(this);
+		upBtn.addActionListener(this);
+		downBtn.addActionListener(this);
+		rightBtn.addActionListener(this);
+		
+		this.addKeyListener(this);
+		
+	}
+	
+	
+	
+	//paint는 ImageMove의 부모클래스인 Frame -> 의 부모클래스인 Window 클래스에 존재함. 오버라이딩을 한 것임.
+	@Override
+	public void paint(Graphics g) {
+		g.drawImage(img, x, y, this); //초기값 이미지 위치 (사진파일명, x좌표, y좌표, 이미지표시위치(현재 Frame객체이므로 this))
+	}
+	
+	//actionListener 추상메소드 오버라이딩
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		if(e.getSource() == initBtn) {
+			x = 100;
+			y = 100;
+		}else if(e.getSource() == leftBtn) {
+			x -= 10;
+		}else if(e.getSource() == upBtn) {
+			y -= 10;
+		}else if(e.getSource() == downBtn) {
+			y += 10;
+		}else if(e.getSource() == rightBtn) {
+			x += 10;
+		}
+		if(x < -100) {
+			x  += 600;
+		}else if(x > 500) {
+			x -= 600;
+		}
+		
+		if(y < -100) {
+			y  += 600;
+		}else if(y > 500) {
+			y -= 600;
+		}
+		repaint();
+		
+	}
+	
+	
+	//WindowListener 추상메소드 오버라이딩
+	@Override
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		System.exit(0);
+		
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	//MouseListener 추상메소드 오버라이딩
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		
+		}
+		
+	
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	//KeyListener 추상메소드 오버라이딩
+	
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE){//VK - Virtual Key
+			System.exit(0);
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	
+}

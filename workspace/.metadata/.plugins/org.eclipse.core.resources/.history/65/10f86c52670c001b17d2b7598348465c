@@ -1,0 +1,85 @@
+package collection;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class SungJukService {
+	private ArrayList<SungJukDTO> list;
+	
+	public void menu() {
+		
+		Scanner scan = new Scanner(System.in);
+		SungJukService ss = new SungJukService();
+		
+		while(true) {
+			System.out.println();
+			System.out.println("*****************");
+			System.out.println("\t1. 입력");
+			System.out.println("\t2. 출력");
+			System.out.println("\t3. 검색");
+			System.out.println("\t4. 삭제");
+			System.out.println("\t5. 정렬");
+			System.out.println("\t6. 끝");
+			System.out.println("*****************");
+			
+			System.out.print("번호 : ");
+			int userchoice = scan.nextInt();
+			
+			if(userchoice == 1) {
+				ss.insertArticle();
+			}else if(userchoice == 2) {
+				ss.printArticle();
+			}else if(userchoice == 3) {
+				
+			}else if(userchoice == 4) {
+				
+			}else if(userchoice == 5) {
+				
+			}else if(userchoice == 6) {
+				break;
+			}else {
+				System.out.println("1~6 중에 선택하세요.");
+			}
+			
+
+		}
+	}//menu()
+	
+	public ArrayList insertArticle() {
+		Scanner scan = new Scanner(System.in);
+		
+		SungJukDTO dto = new SungJukDTO();
+		
+		System.out.print("번호 입력 : ");
+		dto.setNum(scan.nextInt());
+		
+		System.out.print("이름 입력 : ");
+		dto.setName(scan.next());
+		
+		System.out.print("국어 입력 : ");
+		dto.setKor(scan.nextInt());
+		
+		System.out.print("영어 입력 : ");
+		dto.setEng(scan.nextInt());
+		
+		System.out.print("수학 입력 : ");
+		dto.setMath(scan.nextInt());
+		
+		list = new ArrayList<SungJukDTO>();
+		
+		list.add(dto);
+		
+		return list;
+	}
+	
+	public void printArticle() {
+		System.out.println("번호\t이름\t국어\t영어\t수학\t총점\t평균");
+		
+		for(int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).getNum() + "\t" + list.get(i).getName() + "\t" + list.get(i).getKor()
+					+ list.get(i).getEng() + list.get(i).getMath() + list.get(i).getTot() + list.get(i).getAvg());
+		}
+		
+	}
+
+}

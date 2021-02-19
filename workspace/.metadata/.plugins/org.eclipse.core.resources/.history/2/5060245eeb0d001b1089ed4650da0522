@@ -1,0 +1,147 @@
+package exception;
+
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+public class Packman extends Frame implements KeyListener, Runnable{
+	private Image img = Toolkit.getDefaultToolkit().getImage("pacman.png");
+	//private Image img1 = Toolkit.getDefaultToolkit().getImage("horse.gif");
+	private int x1 = 225,y1 = 225;
+	private int sel = 2;
+	private int lc, rc, uc, dc;
+	
+	public Packman() {
+		setBounds(700,200,500,500);
+		setVisible(true);
+		setResizable(false);
+		
+		//이벤트
+		addKeyListener(this);
+		//스레드 생성
+		Thread t = new Thread(this);// 나를 스레드로 만들어주세요.
+		//스레드 실행
+		t.start();
+		
+		
+		addWindowListener(new WindowAdapter(){
+			
+		
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		
+		g.drawImage(img, x1, y1, x1+50, y1 +50, sel*50, 0, sel*50 +50, 50, this);//observer 는 현재 그림을 그릴 위치
+		//dx1, dy1 destination 목표 시작 위치(좌표).
+		//dx2, dy2 destination 목표 최종 위치(좌표).
+		//sx1, sy1 source 가져올 이미지의 시작 위치(좌표).
+		//sx2, sx2 source 가져올 이미지의 종료 위치(좌표).
+		//this -> 이미지를 그릴 위치
+	}
+
+	//인터페이스 Runnable 추상메소드 오버라이딩
+	@Override
+	public void run() {
+		while(true) {
+			if(sel % 2 == 0) {
+				sel += 1;
+			}else {
+				sel -= 1;
+			}
+			
+			if( lc == 1) {
+				if(x1 > 0) {
+					x1 -= 10;
+				}else if( x1 =< 0){
+					x1 = 500;
+				}
+				
+			}else if(rc == 1) {
+				
+				
+				x1 += 10;
+				
+			}else if(uc == 1) {
+				y1 -= 10;
+			}else if(dc == 1) {
+				y1 += 10;
+			}
+			
+			repaint();
+			try {
+				Thread.sleep(100);
+			}catch(InterruptedException e) {
+				e.printStackTrace(); //에러가 발생할 경우 콘솔에 에러를 보여줘라.
+			}
+		}//while
+		
+	}
+	
+	public static void main(String[] args) {
+		new Packman();
+	}
+
+	
+	//인터페이스 KeyListener 추상메소드 오버라이딩
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			System.exit(0);
+		}else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+			sel = 0;
+			
+			lc = 1;
+			rc = 0;
+			uc = 0;
+			dc = 0;
+		}else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			sel = 2;
+			
+			lc = 0;
+			rc = 1;
+			uc = 0;
+			dc = 0;
+		}else if(e.getKeyCode() == KeyEvent.VK_UP) {
+			sel = 4;
+			
+			lc = 0;
+			rc = 0;
+			uc = 1;
+			dc = 0;
+		}else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+			sel = 6;
+			
+			lc = 0;
+			rc = 0;
+			uc = 0;
+			dc = 1;
+			
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+}

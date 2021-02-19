@@ -1,0 +1,22 @@
+package collection;
+
+import java.util.ArrayList;
+
+public class CollectionTest2 {
+
+	public static void main(String[] args) {
+		//ArrayList는 일반클래스 이기 떄문에 
+		ArrayList list = new ArrayList();
+		list.add("호랑이");
+		list.add("사자");
+		list.add("호랑이");
+		list.add(25);
+		list.add(43.8);
+		list.add("기린");
+		list.add("코끼리");
+		
+		list.get(0);
+
+	}
+
+}

@@ -1,0 +1,119 @@
+package collection;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class SungJukService {
+	private ArrayList<SungJukDTO> list = new ArrayList<SungJukDTO>();
+	
+	public void menu() {
+		
+		Scanner scan = new Scanner(System.in);
+		SungJukService ss = new SungJukService();
+		
+		while(true) {
+			System.out.println();
+			System.out.println("*****************");
+			System.out.println("\t1. 입력");
+			System.out.println("\t2. 출력");
+			System.out.println("\t3. 검색");
+			System.out.println("\t4. 삭제");
+			System.out.println("\t5. 정렬");
+			System.out.println("\t6. 끝");
+			System.out.println("*****************");
+			
+			System.out.print("번호 : ");
+			int userchoice = scan.nextInt();
+			
+			if(userchoice == 1) {
+				ss.insertArticle();
+			}else if(userchoice == 2) {
+				ss.printArticle();
+			}else if(userchoice == 3) {
+				ss.searchArticle();
+			}else if(userchoice == 4) {
+				ss.deleteArticle();
+			}else if(userchoice == 5) {
+				
+			}else if(userchoice == 6) {
+				break;
+			}else {
+				System.out.println("1~6 중에 선택하세요.");
+			}
+			
+
+		}
+	}//menu()
+	
+	public void insertArticle() {
+		Scanner scan = new Scanner(System.in);
+		
+		SungJukDTO dto = new SungJukDTO();
+		
+		System.out.print("번호 입력 : ");
+		dto.setNum(scan.nextInt());
+		
+		System.out.print("이름 입력 : ");
+		dto.setName(scan.next());
+		
+		System.out.print("국어 입력 : ");
+		dto.setKor(scan.nextInt());
+		
+		System.out.print("영어 입력 : ");
+		dto.setEng(scan.nextInt());
+		
+		System.out.print("수학 입력 : ");
+		dto.setMath(scan.nextInt());
+		
+		list.add(dto);
+		
+	}
+	
+	public void printArticle() {
+		System.out.println("번호\t이름\t국어\t영어\t수학\t총점\t평균");
+		for(int i = 0; i < list.size(); i++) {
+			list.get(i).calc();
+			System.out.println(list.get(i).getNum() + "\t" + list.get(i).getName() + "\t" + list.get(i).getKor() + "\t"
+					+ list.get(i).getEng() + "\t" + list.get(i).getMath() + "\t" + list.get(i).getTot() + "\t" + list.get(i).getAvg());
+		}
+		
+	}
+	
+	public void searchArticle() {
+		Scanner scan = new Scanner(System.in);
+		System.out.print("검색할 이름 : ");
+		String searchname = scan.next();
+		int count = 0;
+		
+		System.out.println("번호\t이름\t국어\t영어\t수학\t총점\t평균");
+		for(int i = 0; i < list.size(); i++) {
+			if(searchname.equals(list.get(i).getName())) {
+				list.get(i).calc();
+				System.out.println(list.get(i).getNum() + "\t" + list.get(i).getName() + "\t" + list.get(i).getKor() + "\t"
+						+ list.get(i).getEng() + "\t" + list.get(i).getMath() + "\t" + list.get(i).getTot() + "\t" + list.get(i).getAvg());
+				count ++;
+			}
+		}
+		if(count == 0) {
+			System.out.println("찾고자 하는 이름이 없습니다.");
+		}
+		
+		
+	}//searchArticle()
+	
+	public void deleteArticle() {
+		Scanner scan = new Scanner(System.in);
+		System.out.print("삭제할 이름 입력 : ");
+		String deletename = scan.next();
+		
+		for(int i = 0 ; i < list.size() ; i++) {
+			if(deletename.equals(list.get(i).getName())) {
+				list.remove(i);
+				i = -1;
+			}
+		}
+		System.out.println("데이터를 삭제하였습니다.");
+		
+	}
+
+}

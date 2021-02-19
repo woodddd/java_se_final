@@ -1,0 +1,80 @@
+package exception;
+
+import java.awt.Frame;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+public class Packman extends Frame implements KeyListener{
+	private Image img = Toolkit.getDefaultToolkit().getImage("pacman.png");
+	//private Image img1 = Toolkit.getDefaultToolkit().getImage("horse.gif");
+	private int x1 = 100,y1 = 0,x2 = 150 ,y2 = 50;
+	private int sel = 2;
+	
+	public Packman() {
+		setBounds(700,200,500,500);
+		setVisible(true);
+		setResizable(false);
+		
+		addKeyListener(this);
+		addWindowListener(new WindowAdapter(){
+			
+		
+			
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+	}
+	
+	@Override
+	public void paint(Graphics g) {
+		
+		g.drawImage(img, 225, 225, 275, 275, sel*50, 0, sel*50 +50, 50, this);//observer 는 현재 그림을 그릴 위치
+		//dx1, dy1 destination 목표 시작 위치(좌표).
+		//dx2, dy2 destination 목표 최종 위치(좌표).
+		//sx1, sy1 source 가져올 이미지의 시작 위치(좌표).
+		//sx2, sx2 source 가져올 이미지의 종료 위치(좌표).
+		//this -> 이미지를 그릴 위치
+	}
+
+	public static void main(String[] args) {
+		new Packman();
+	}
+
+	
+	//인터페이스 KeyListener 추상메소드 오버라이딩
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			System.exit(0);
+		}else if(e.getKeyCode() == KeyEvent.VK_LEFT) {
+			sel = 0;
+		}else if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			sel = 2;
+		}else if(e.getKeyCode() == KeyEvent.VK_UP) {
+			sel = 4;
+		}else if(e.getKeyCode() == KeyEvent.VK_DOWN) {
+			sel = 6;
+		}
+		repaint();
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
